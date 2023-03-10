@@ -1,5 +1,7 @@
 <h3>A simple makefile generator for C programs written in Rust</h3>
 
+<h4>A sample program run</h4>
+
 <pre>
   <code>
     Enter Main File ex: main.c : 
