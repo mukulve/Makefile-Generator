@@ -1,6 +1,7 @@
 use std::fs::File;
-use std::io;
+use std::io::stdin;
 use std::io::Write;
+use std::time::Instant;
 
 fn main() {
     //Set variables
@@ -10,21 +11,21 @@ fn main() {
     let mut make_file = String::new();
     let gcc_command = "gcc -Wall -std=c99 ";
     let mut temp_str = String::new();
-    let stdin = io::stdin();
     //Get user input
     println!("Enter Main File ex: main.c : ");
-    stdin
+    stdin()
         .read_line(&mut main_file)
         .expect("Couldnt Read From STDIO");
     println!("Enter C Files seperated by spaces ex: 1.c 2.c : ");
-    stdin
+    stdin()
         .read_line(&mut c_file)
         .expect("Couldnt Read From STDIO");
     println!("Enter Header File ex: main.h : ");
-    stdin
+    stdin()
         .read_line(&mut header_file)
         .expect("Couldnt Read From STDIO");
     //Remove new line character from use input
+    let now = Instant::now();
     main_file.truncate(main_file.len() - 1);
     header_file.truncate(header_file.len() - 1);
     c_file.truncate(c_file.len() - 1);
@@ -82,4 +83,6 @@ fn main() {
     //Create and write makefile
     let mut file = File::create("makefile").expect("Couldnt Create File!");
     writeln!(&mut file, "{}", make_file).unwrap();
+    let elapsed = now.elapsed();
+    println!("Time Taken : {:.2?}", elapsed);
 }
