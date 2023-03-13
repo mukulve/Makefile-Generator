@@ -25,6 +25,7 @@ fn main() {
         .read_line(&mut header_file)
         .expect("Couldnt Read From STDIO");
     //Remove new line character from use input
+    main_file.truncate(main_file.len() - 1);
     header_file.truncate(header_file.len() - 1);
     c_file.truncate(c_file.len() - 1);
     //Create and Format makefile
